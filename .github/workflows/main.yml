@@ -1,0 +1,15 @@
+name: Trigger Hook Daily
+
+on:
+  schedule:
+  - cron: "0 22 * * *"
+  
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: cURL hook
+        run: |
+          curl -X POST -d {} https://api.netlify.com/build_hooks/${{ secrets.hookId }}
