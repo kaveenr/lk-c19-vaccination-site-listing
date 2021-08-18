@@ -88,7 +88,7 @@ export default function Center(props) {
             <span className="font-medium">{t("address")}: </span> 
             {startPoint[`formatted_address${lprefix}`]}
           </p>
-          <div className="pt-4 flex gap-2">
+          <div className="pt-4 flex gap-2 flex-col md:flex-row">
             <a target="_blank" href={`https://www.google.com/maps/search/?api=1&query=${startPoint.lat},${startPoint.lng}`}>
               <p className={"text-white text-sm px-4 py-2 rounded-full bg-green-400 flex gap-2"}>
                 <div className="h-4 w-4">

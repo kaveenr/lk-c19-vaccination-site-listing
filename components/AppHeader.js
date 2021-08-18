@@ -9,11 +9,14 @@ export const AppHeader = ({ sub }) => {
     const { locale, asPath } = useRouter();
 
     return (
-        <header className="mt-8 md:mt-16 mb-8 text-center">
+        <header className="mt-2 md:mt-8 mb-8 text-center">
             <Link href="/">
-                <a className="md:text-3xl text-2xl font-bold text-pink-600">
-                    {t('title')} 
-                </a>
+                <div>
+                    <p className="md:text-3xl text-2xl mb-2">💉</p>
+                    <a className="md:text-3xl text-2xl font-bold text-pink-600">
+                        {t('title')} 
+                    </a>
+                </div>
             </Link>
             <p className="mt-3 md:text-2xl text-1xl italic text-gray-500">
                 {sub ? sub: t('sub')} 
