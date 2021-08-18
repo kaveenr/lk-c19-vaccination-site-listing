@@ -2,7 +2,7 @@ import Head from 'next/head'
 import {useTranslations} from 'next-intl';
 import {useRouter} from 'next/router';
 import { AppHeader } from '../components/AppHeader';
-import ReactMapGL, { Marker } from 'react-map-gl';
+import ReactMapGL, { FlyToInterpolator, Marker } from 'react-map-gl';
 import { useEffect, useRef, useState } from 'react';
 import useSize from '@react-hook/size';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -10,16 +10,17 @@ import { faSyringe } from '@fortawesome/free-solid-svg-icons'
 import { truncate } from 'lodash';
 import { AppFooter } from '../components/AppFooter';
 import Link from 'next/link'
-import { Disclaimer } from '../components/Disclaimer';
+import WebMercatorViewport from "viewport-mercator-project"
+import { getBounds } from '../util/mapUtils';
 
 
-const ItmRow = ({itm, lprefix}) => {
+const ItmRow = ({itm, lprefix, onHover}) => {
   const t = useTranslations('District');
 
   return (
     <Link href={`/${itm.district}/${itm.center}`} key={itm.center}>
       <a>
-      <div className={"bg-gray-50 px-6 py-4 mb-4"}>
+      <div className={"bg-gray-50 px-6 py-4 mb-4"} onMouseEnter={() => onHover(itm)}>
         <p className={"text-xl font-medium "}>{itm[`center${lprefix}`]}</p>
         <div className="flex gap-2 pb-2 pt-1">
           {itm.dose1 == "True" ? (
@@ -54,22 +55,36 @@ export default function District(props) {
 
   const startPoint = props.items[0];
   const [viewport, setViewport] = useState({
-    width: width || "200px",
-    height: height || "600px",
-    latitude: parseFloat(startPoint.lat),
-    longitude: parseFloat(startPoint.lng),
-    zoom: 11
+    width: width || 200,
+    height: height || 200
   });
 
   useEffect(() => {
-    if (width && height){
-      setViewport((viewport) => ({
-        ...viewport, 
-        width: width,
-        height: height
-      }))
+    if (width && height && props.items.length){
+      const bounds = getBounds(props.items);
+      setViewport((viewport) => {
+        const nextViewport = new WebMercatorViewport({
+          ...viewport,
+          width,
+          height
+        }).fitBounds(bounds, {
+           padding: 100
+        });
+        return nextViewport;
+      })
     }
   }, [width, height]);
+
+  const onHover = (itm) => {
+    setViewport((viewport) => ({
+      ...viewport,
+      latitude: parseFloat(itm.lat),
+      longitude: parseFloat(itm.lng),
+      zoom: 15,
+      transitionInterpolator: new FlyToInterpolator({speed: 1.2}),
+      transitionDuration: 'auto'
+  }));
+  }
   
   return (
     <>
@@ -99,7 +114,7 @@ export default function District(props) {
           </div>
         </div>
         <div className="flex-grow md:w-1/2 md:overflow-y-auto">
-          {props.items.map(itm => <ItmRow itm={itm} lprefix={lprefix} />)}
+          {props.items.map(itm => <ItmRow onHover={onHover} itm={itm} lprefix={lprefix} />)}
         </div>
       </main>
       <AppFooter />
