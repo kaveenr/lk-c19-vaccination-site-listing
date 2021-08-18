@@ -9,10 +9,11 @@ export const Disclaimer = ({ sub }) => {
 
     return (
         <div className="p-4 bg-yellow-600 rounded-50">
-            <span className="text-white">
-                <FontAwesomeIcon icon={faExclamationTriangle} />
-                {'  '}
-                {t("data")}
+            <span className="text-white flex gap-2">
+                <div className="h-8 w-8">
+                    <FontAwesomeIcon icon={faExclamationTriangle} />
+                </div>
+                <div>{t("data")}</div>
             </span>
         </div>
     );

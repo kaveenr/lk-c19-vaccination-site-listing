@@ -90,19 +90,19 @@ export default function Center(props) {
           </p>
           <div className="pt-4 flex gap-2">
             <a target="_blank" href={`https://www.google.com/maps/search/?api=1&query=${startPoint.lat},${startPoint.lng}`}>
-              <p className={"text-white text-sm px-4 py-2 rounded-full bg-green-400"}>
-                <span className="h-4 w-4">
+              <p className={"text-white text-sm px-4 py-2 rounded-full bg-green-400 flex gap-2"}>
+                <div className="h-4 w-4">
                   <FontAwesomeIcon icon={faMap} color="white" />
-                </span>{'  '}
-                {t("maps")}
+                </div>
+                <div>{t("maps")}</div>
               </p>
             </a>
             <a target="_blank" href={`https://twitter.com/search?q=%23${hashtag}&src=typed_query`}>
-              <p className={"text-white text-sm px-4 py-2 rounded-full bg-blue-400"}>
-                <span className="h-4 w-4">
+              <p className={"text-white text-sm px-4 py-2 rounded-full bg-blue-400 flex gap-2"}>
+                <div className="h-4 w-4">
                   <FontAwesomeIcon icon={faHashtag} color="white" />
-                </span>{'  '}
-                {hashtag}
+                </div>
+                <div>{hashtag}</div>
               </p>
             </a>
           </div>
