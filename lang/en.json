@@ -12,11 +12,15 @@
       "count": "Number of Stations"
     },
     "District": {
-      "title": "COVID 19 Vaccination Locations",
+      "title": "Vaccination Stations In {district}",
       "sub": "Vaccination Stations In {district}",
       "police": "Police Area",
       "address": "Address",
       "dose1": "First Dose",
       "dose2": "Second Dose"
+    },
+    "Center": {
+      "title": "Vaccination Station - {center}",
+      "sub": "Vaccination Station - {center}"
     }
 }

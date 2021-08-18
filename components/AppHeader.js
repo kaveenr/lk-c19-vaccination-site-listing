@@ -9,7 +9,7 @@ export const AppHeader = ({ sub }) => {
     const { locale, asPath } = useRouter();
 
     return (
-        <header className="mt-16 mb-8 text-center">
+        <header className="mt-8 md:mt-16 mb-8 text-center">
             <Link href="/">
                 <a className="md:text-3xl text-2xl font-bold text-pink-600">
                     {t('title')} 

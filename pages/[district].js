@@ -9,31 +9,36 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSyringe } from '@fortawesome/free-solid-svg-icons'
 import { truncate } from 'lodash';
 import { AppFooter } from '../components/AppFooter';
+import Link from 'next/link'
 
 
 const ItmRow = ({itm, lprefix}) => {
   const t = useTranslations('District');
 
   return (
-    <div className={"bg-gray-50 px-6 py-4 mb-4"}>
-      <p className={"text-xl font-medium pb-2"}>{itm[`center${lprefix}`]}</p>
-      <p className={"text-gray-500"}>
-        <span className="font-medium">{t("police")}: </span> 
-        {itm[`police${lprefix}`]}
-      </p>
-      <p className={"text-gray-500"}>
-        <span className="font-medium">{t("address")}: </span> 
-        {itm[`formatted_address${lprefix}`]}
-      </p>
-      <div className="flex gap-2 pt-4">
-        {itm.dose1 == "True" ? (
-          <p className={"px-4 py-1 border-2 rounded-full border-gray-600"}>{t('dose1')}</p>
-        ): []}
-        {itm.dose2 == "True" ? (
-          <p className={"px-4 py-1 border-2 rounded-full border-gray-600"}>{t('dose2')}</p>
-        ): []}
+    <Link href={`/${itm.district}/${itm.center}`} key={itm.center}>
+      <a>
+      <div className={"bg-gray-50 px-6 py-4 mb-4"}>
+        <p className={"text-xl font-medium "}>{itm[`center${lprefix}`]}</p>
+        <div className="flex gap-2 pb-2 pt-1">
+          {itm.dose1 == "True" ? (
+            <p className={"text-gray-600 text-sm px-2 italic border-2 rounded-full border-gray-600"}>{t('dose1')}</p>
+          ): []}
+          {itm.dose2 == "True" ? (
+            <p className={"text-gray-600 text-sm px-2 italic border-2 rounded-full border-gray-600"}>{t('dose2')}</p>
+          ): []}
+        </div>
+        <p className={"text-gray-500"}>
+          <span className="font-medium">{t("police")}: </span> 
+          {itm[`police${lprefix}`]}
+        </p>
+        <p className={"text-gray-500"}>
+          <span className="font-medium">{t("address")}: </span> 
+          {itm[`formatted_address${lprefix}`]}
+        </p>
       </div>
-    </div>
+      </a>
+    </Link>
   );
 }
 
@@ -68,7 +73,7 @@ export default function District(props) {
   return (
     <>
       <Head>
-        <title>{t('title')} {startPoint[`district${lprefix}`]}</title>
+        <title>{t('title', {district: startPoint[`district${lprefix}`]})}</title>
       </Head>
       <AppHeader sub={t("sub", {district: startPoint[`district${lprefix}`]})}/>
       <main className="md:flex md:gap-4 md:max-h-screen">
@@ -80,10 +85,14 @@ export default function District(props) {
               onViewportChange={nextViewport => setViewport(nextViewport)}
             >
               {props.items.map(a => <Marker latitude={parseFloat(a.lat)} longitude={parseFloat(a.lng)}>
-                <div className={"bg-yellow-50 bg-opacity-50 rounded-full h-24 w-24 flex flex-col items-center justify-center"}>
-                  <FontAwesomeIcon icon={faSyringe} color="red" />
+                <Link href={`/${a.district}/${a.center}`} key={a.center}>
+                <a className={"bg-yellow-50 bg-opacity-50 rounded-full h-24 w-24 flex flex-col items-center justify-center"}>
+                  <div className="h-4 w-4">
+                    <FontAwesomeIcon icon={faSyringe} color="red" />
+                  </div>
                   <p className="text-xs font-medium text-center">{truncate(a[`center${lprefix}`], { length: 15})}</p>
-                </div>
+                </a>
+                </Link>
               </Marker>)}
           </ReactMapGL>
           </div>
