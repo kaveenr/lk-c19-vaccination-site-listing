@@ -1,14 +1,20 @@
 {
   "private": true,
   "scripts": {
+    "download": "node down-data.js",
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run download && next build",
     "start": "next start"
   },
   "dependencies": {
+    "@types/lodash": "^4.14.172",
+    "lodash": "^4.17.21",
     "next": "latest",
+    "next-intl": "^1.5.1",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-map-gl": "^6.1.16",
+    "request": "^2.88.2"
   },
   "devDependencies": {
     "autoprefixer": "^10.2.6",
