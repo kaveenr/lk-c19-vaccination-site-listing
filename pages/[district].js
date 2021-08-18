@@ -10,6 +10,7 @@ import { faSyringe } from '@fortawesome/free-solid-svg-icons'
 import { truncate } from 'lodash';
 import { AppFooter } from '../components/AppFooter';
 import Link from 'next/link'
+import { Disclaimer } from '../components/Disclaimer';
 
 
 const ItmRow = ({itm, lprefix}) => {

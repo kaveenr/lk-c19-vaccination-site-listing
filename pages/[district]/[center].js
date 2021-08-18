@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSyringe, faMap, faHashtag } from '@fortawesome/free-solid-svg-icons'
 import { camelCase, upperFirst, truncate } from 'lodash';
 import { AppFooter } from '../../components/AppFooter';
+import { Disclaimer } from '../../components/Disclaimer';
 
 export default function Center(props) {
 
@@ -65,7 +66,7 @@ export default function Center(props) {
           </ReactMapGL>
           </div>
         </div>
-        <div className="flex-grow md:w-1/2 md:overflow-y-auto">
+        <div className="flex-grow md:w-1/2">
           <h3 className={"text-xl font-medium pb-2"}>{startPoint[`center${lprefix}`]}</h3>
           <div className="flex gap-2 pb-4">
             {startPoint.dose1 == "True" ? (
@@ -90,17 +91,22 @@ export default function Center(props) {
           <div className="pt-4 flex gap-2">
             <a target="_blank" href={`https://www.google.com/maps/search/?api=1&query=${startPoint.lat},${startPoint.lng}`}>
               <p className={"text-white text-sm px-4 py-2 rounded-full bg-green-400"}>
-                <FontAwesomeIcon icon={faMap} color="white" />{'  '}
-                Google Maps Link
+                <span className="h-4 w-4">
+                  <FontAwesomeIcon icon={faMap} color="white" />
+                </span>{'  '}
+                {t("maps")}
               </p>
             </a>
             <a target="_blank" href={`https://twitter.com/search?q=%23${hashtag}&src=typed_query`}>
               <p className={"text-white text-sm px-4 py-2 rounded-full bg-blue-400"}>
-                <FontAwesomeIcon icon={faHashtag} color="white" />{'  '}
+                <span className="h-4 w-4">
+                  <FontAwesomeIcon icon={faHashtag} color="white" />
+                </span>{'  '}
                 {hashtag}
               </p>
             </a>
           </div>
+          <div className="mt-5"><Disclaimer /></div>
         </div>
       </main>
       <AppFooter />

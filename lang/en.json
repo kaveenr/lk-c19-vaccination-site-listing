@@ -5,7 +5,9 @@
       "lang": "Language"
     },
     "Footer": {
-      "lastUpdated": "Last updated on {date}"
+      "lastUpdated": "Last updated on {date}",
+      "dataBy": "Dataset prepared by @nuuuwan.",
+      "applicationBy": "Website made by ukr.lk"
     },
     "Index": {
       "title": "COVID 19 Vaccination Locations",
@@ -21,6 +23,15 @@
     },
     "Center": {
       "title": "Vaccination Station - {center}",
-      "sub": "Vaccination Station - {center}"
+      "sub": "Vaccination Station - {center}",
+      "district": "District",
+      "police": "Police Area",
+      "address": "Address",
+      "dose1": "First Dose",
+      "dose2": "Second Dose",
+      "maps": "Google Maps Location"
+    },
+    "Disclaimer": {
+      "data": "This data is extracted from the presidential secretariat website automatically and presented, please double check with original source."
     }
 }

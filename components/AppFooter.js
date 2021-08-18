@@ -13,6 +13,12 @@ export const AppFooter = () => {
             <p className="mt-3">
                 {t("lastUpdated", {date: intl.formatDateTime(new Date())})}
             </p>
+            <a target="_blank" href="https://github.com/nuuuwan" className="mt-3 text-sm hover:text-blue-600 text-blue-500">
+                {t("dataBy")}
+            </a>{' '}
+            <a target="_blank" href="https://ukr.lk" className="mt-3 text-sm hover:text-blue-600 text-blue-500">
+                {t("applicationBy")}
+            </a>
         </footer>
     );
 }
