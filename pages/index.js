@@ -15,6 +15,10 @@ export default function Home(props) {
       [locale == "en" ? "district": `district_${locale}`];
   }
 
+  const getStationCount = (slug) => {
+    return props.dataset.filter(a => a.district === slug).length;
+  }
+
   return (
     <>
       <Head>
@@ -23,11 +27,15 @@ export default function Home(props) {
       </Head>
 
       <AppHeader/>
-      <main className="text-center">
+      <main>
       {props.districtSlugs.map(a => (
         <Link href={`/${a}`}>
           <div className={"bg-gray-50 px-4 py-4 mb-4"}>
-            <p className={"text-xl font-medium pb-2"}>{getLocalDistrict(a)} {t('district')}</p>
+            <p className={"text-xl font-medium pb-2"}>{getLocalDistrict(a)}</p>
+            <p className={"text-gray-500"}>
+              <span className="font-medium">{t("count")}: </span> 
+              {getStationCount(a)}
+            </p>
           </div>
         </Link>
       ))}

@@ -1,7 +1,7 @@
 {
     "Header": {
       "title": "COVID 19 Vaccination Locations",
-      "sub": "Find Vaccination Sites In Sri Lanka",
+      "sub": "Find Vaccination Stations In Sri Lanka",
       "lang": "Language"
     },
     "Footer": {
@@ -9,11 +9,11 @@
     },
     "Index": {
       "title": "COVID 19 Vaccination Locations",
-      "district": "District"
+      "count": "Number of Stations"
     },
     "District": {
       "title": "COVID 19 Vaccination Locations",
-      "sub": "Vaccination Sites In {district}",
+      "sub": "Vaccination Stations In {district}",
       "police": "Police Area",
       "address": "Address",
       "dose1": "First Dose",
