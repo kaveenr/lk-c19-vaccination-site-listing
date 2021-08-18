@@ -9,13 +9,13 @@ export const AppHeader = ({ sub }) => {
     const { locale, asPath } = useRouter();
 
     return (
-        <header className="py-4 text-center">
+        <header className="mt-16 mb-8 text-center">
             <Link href="/">
-                <a className="md:text-3xl text-2xl font-bold">
+                <a className="md:text-3xl text-2xl font-bold text-pink-600">
                     {t('title')} 
                 </a>
             </Link>
-            <p className="mt-3 md:text-2xl text-1xl">
+            <p className="mt-3 md:text-2xl text-1xl italic text-gray-500">
                 {sub ? sub: t('sub')} 
             </p>
             <div className="flex gap-2 justify-center py-4">

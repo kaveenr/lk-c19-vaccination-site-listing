@@ -30,7 +30,7 @@ export default function Home(props) {
       <main>
       {props.districtSlugs.map(a => (
         <Link href={`/${a}`}>
-          <div className={"bg-gray-50 px-4 py-4 mb-4"}>
+          <div className={"bg-gray-50 px-6 py-4 mb-4"}>
             <p className={"text-xl font-medium pb-2"}>{getLocalDistrict(a)}</p>
             <p className={"text-gray-500"}>
               <span className="font-medium">{t("count")}: </span> 

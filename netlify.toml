@@ -4,3 +4,9 @@
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+
+[dev]
+  framework = "#custom"
+  command = "yarn dev"
+  targetPort = 3000
+  port = 8888

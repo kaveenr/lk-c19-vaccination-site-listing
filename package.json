@@ -7,7 +7,11 @@
     "start": "next start"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "@fortawesome/react-fontawesome": "^0.1.15",
     "@netlify/plugin-nextjs": "^3.8.0",
+    "@react-hook/size": "^2.1.2",
     "@types/lodash": "^4.14.172",
     "lodash": "^4.17.21",
     "next": "11.0.1",

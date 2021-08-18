@@ -9,7 +9,7 @@ export const AppFooter = () => {
     const intl = useIntl();
 
     return (
-        <footer className="py-4 text-center">
+        <footer className="my-8 text-center">
             <p className="mt-3">
                 {t("lastUpdated", {date: intl.formatDateTime(new Date())})}
             </p>
