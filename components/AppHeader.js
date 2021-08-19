@@ -13,7 +13,8 @@ export const AppHeader = ({ sub }) => {
             <Link href="/">
                 <div>
                     <a className="md:text-3xl text-2xl font-bold text-pink-600">
-                        💉{' '}{t('title')} 
+                        <p className="mb-2">💉</p>
+                        {t('title')} 
                     </a>
                 </div>
             </Link>

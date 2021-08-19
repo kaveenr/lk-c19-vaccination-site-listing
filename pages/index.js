@@ -20,10 +20,10 @@ const ChartComponent = ({vaxData}) => {
   }))
 
   return (
-    <div className="grid gap-4 grid-cols-1 h-full p-4">
-      <div className="h-full w-full text-center">
+    <div className="flex flex-col items-stretch h-full ">
+      <div className="w-full flex-grow text-center px-2 py-4">
         <p className="text-2xl mb-4">{t('totalDo')}</p>
-        <ResponsiveContainer>
+        <ResponsiveContainer height="85%">
           <AreaChart
           data={vaxData}
 
@@ -31,28 +31,27 @@ const ChartComponent = ({vaxData}) => {
             top: 0,
             right: 35,
             left: 35,
-            bottom: 10,
+            bottom: 0,
           }}
         >
           <XAxis dataKey="date" name="date"/>
           <YAxis type="number" domain={['auto', 'auto']} />
           <Tooltip />
-          <Legend />
           <Area name={t('cumDo1')} type="monotone" stackId="1" dataKey="cum_total_dose1" stroke="#ffc658" fill="#ffc658" />
           <Area name={t('cumDo2')} type="monotone" stackId="1" dataKey="cum_total_dose2" stroke="#82ca9d" fill="#82ca9d" />
         </AreaChart>
         </ResponsiveContainer>
       </div>
-      <div className="h-full w-full text-center">
+      <div className="w-full flex-grow text-center px-2 py-4">
         <p className="text-2xl mb-4">{t('totalVa')}</p>
-        <ResponsiveContainer>
+        <ResponsiveContainer height="85%">
           <BarChart
               data={vaxPrgData}
               margin={{
                 top: 0,
-                right: 30,
+                right: 35,
                 left: 35,
-                bottom: 100,
+                bottom: 0,
               }}
             >
               <XAxis dataKey="name" />
@@ -89,11 +88,11 @@ export default function Home(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <AppHeader/>
-      <main className="grid gap-4 grid-cols-1 md:grid-cols-2 grid-row-1">
-        <div className="md:h-2/5 bg-gray-50 hidden md:block">
+      <main className="grid gap-4 grid-cols-1 md:grid-cols-2 grid-row-1 md:h-2/3">
+        <div className="bg-gray-50 hidden md:block h-full">
             <ChartComponent vaxData={props.vaxDataset}/>
         </div>
-        <div className="md:h-2/5 md:overflow-y-auto md:overscroll-y-auto">
+        <div className="md:overflow-y-auto md:overscroll-y-auto">
           {props.districtSlugs.map(a => (
               <Link href={`/${a}`}>
                 <a>

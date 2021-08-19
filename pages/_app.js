@@ -32,7 +32,7 @@ function MyApp({ Component, pageProps }) {
       messages={pageProps.messages}
       now={new Date(pageProps.now)}
     >
-      <div className={"md:container mx-auto px-4 py-1"}>
+      <div className={"md:container mx-auto px-4 py-1 h-screen"}>
         <Component {...pageProps} />
       </div>
     </NextIntlProvider>

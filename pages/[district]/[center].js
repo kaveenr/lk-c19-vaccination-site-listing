@@ -48,8 +48,8 @@ export default function Center(props) {
         <title>{t('title', {center: startPoint[`center${lprefix}`]})}</title>
       </Head>
       <AppHeader sub={t("sub", {center: startPoint[`center${lprefix}`]})}/>
-      <main className="md:flex md:gap-4 md:max-h-screen">
-        <div className={"bg-gray-50 md:w-1/2 hidden md:block"}>
+      <main className="grid gap-4 grid-cols-1 md:grid-cols-2 grid-row-1 md:h-2/3">
+        <div className="bg-gray-50 hidden md:block h-full">
           <div ref={mapRef} className={"h-full"}>
             <ReactMapGL
               {...viewport}
@@ -67,7 +67,7 @@ export default function Center(props) {
           </ReactMapGL>
           </div>
         </div>
-        <div className="flex-grow md:w-1/2">
+        <div className="md:overflow-y-auto md:overscroll-y-auto bg-gray-50 p-4">
           <h3 className={"text-xl font-medium pb-2"}>{startPoint[`center${lprefix}`]}</h3>
           <div className="flex gap-2 pb-4">
             {startPoint.dose1 == "True" ? (
