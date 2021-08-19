@@ -1,4 +1,10 @@
 {
+    "Graph": {
+      "totalDo": "Total Vaccination Doses",
+      "totalVa": "Total Doses By Vaccines",
+      "cumDo1": "Cumulative first dose",
+      "cumDo2": "Cumulative second dose"
+    },
     "Header": {
       "title": "COVID 19 Vaccination Locations",
       "sub": "Find Vaccination Stations In Sri Lanka",

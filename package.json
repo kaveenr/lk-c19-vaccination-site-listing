@@ -19,6 +19,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-map-gl": "^6.1.16",
+    "recharts": "^2.1.0",
     "request": "^2.88.2"
   },
   "devDependencies": {

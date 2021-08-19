@@ -93,8 +93,8 @@ export default function District(props) {
         <title>{t('title', {district: startPoint[`district${lprefix}`]})}</title>
       </Head>
       <AppHeader sub={t("sub", {district: startPoint[`district${lprefix}`]})}/>
-      <main className="md:flex md:gap-4 md:max-h-screen">
-        <div className={"bg-gray-50 md:w-1/2 hidden md:block"}>
+      <main className="grid gap-4 grid-cols-1 md:grid-cols-2 md:h-2/5">
+        <div className={"md:h-2/5 bg-gray-50 hidden md:block"}>
           <div ref={mapRef} className={"h-full"}>
             <ReactMapGL
               {...viewport}
@@ -114,7 +114,7 @@ export default function District(props) {
           </ReactMapGL>
           </div>
         </div>
-        <div className="flex-grow md:w-1/2 md:overflow-y-auto">
+        <div className="md:h-2/5 md:overflow-y-auto md:overscroll-y-auto">
           {props.items.map(itm => <ItmRow onHover={onHover} itm={itm} lprefix={lprefix} />)}
         </div>
       </main>
