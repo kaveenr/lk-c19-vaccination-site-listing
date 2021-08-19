@@ -12,6 +12,7 @@ import { AppFooter } from '../components/AppFooter';
 import Link from 'next/link'
 import WebMercatorViewport from "viewport-mercator-project"
 import { getBounds } from '../util/mapUtils';
+import { MPABOX_TOKEN } from '../util/constants';
 
 
 const ItmRow = ({itm, lprefix, onHover}) => {
@@ -97,7 +98,7 @@ export default function District(props) {
           <div ref={mapRef} className={"h-full"}>
             <ReactMapGL
               {...viewport}
-              mapboxApiAccessToken={"pk.eyJ1IjoidWtyaHEiLCJhIjoiY2tzZmp5ODRqMWIwcjJ1bjV6cHZmNHV3ZiJ9.xEVN9z2chyXqe03alU2O1Q"}
+              mapboxApiAccessToken={MPABOX_TOKEN}
               onViewportChange={nextViewport => setViewport(nextViewport)}
             >
               {props.items.map(a => <Marker latitude={parseFloat(a.lat)} longitude={parseFloat(a.lng)}>

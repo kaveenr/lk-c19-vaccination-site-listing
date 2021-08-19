@@ -10,6 +10,7 @@ import { faSyringe, faMap, faHashtag } from '@fortawesome/free-solid-svg-icons'
 import { camelCase, upperFirst, truncate } from 'lodash';
 import { AppFooter } from '../../components/AppFooter';
 import { Disclaimer } from '../../components/Disclaimer';
+import { MPABOX_TOKEN } from '../../util/constants';
 
 export default function Center(props) {
 
@@ -52,7 +53,7 @@ export default function Center(props) {
           <div ref={mapRef} className={"h-full"}>
             <ReactMapGL
               {...viewport}
-              mapboxApiAccessToken={"pk.eyJ1IjoidWtyaHEiLCJhIjoiY2tzZmp5ODRqMWIwcjJ1bjV6cHZmNHV3ZiJ9.xEVN9z2chyXqe03alU2O1Q"}
+              mapboxApiAccessToken={MPABOX_TOKEN}
               onViewportChange={nextViewport => setViewport(nextViewport)}
             >
               <Marker latitude={parseFloat(startPoint.lat)} longitude={parseFloat(startPoint.lng)}>
