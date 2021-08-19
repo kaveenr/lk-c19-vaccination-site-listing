@@ -19,16 +19,30 @@ var options = {
     'url': 'https://raw.githubusercontent.com/nuuuwan/covid19/data/covid19.lk_vax_centers.latest.tsv',
     'headers': {
     }
-  };
-  request(options, function (error, response) {
-    if (error) throw new Error(error);
-    data = tsvJSON(response.body).filter(a => a.district || false);
+};
 
-    transform = {
-      districtSlugs: (
-        [... new Set(data.map(a=> a.district))]
-      ),
-      dataSet: data
-    }
-    fs.writeFileSync("./data/latest.json", JSON.stringify(transform, null, 4));
-  });
+request(options, function (error, response) {
+  if (error) throw new Error(error);
+  data = tsvJSON(response.body).filter(a => a.fuzzy_key != "" || false);
+
+  transform = {
+    districtSlugs: (
+      [... new Set(data.map(a=> a.district))]
+    ),
+    dataSet: data
+  }
+  fs.writeFileSync("./data/latest.json", JSON.stringify(transform, null, 4));
+});
+
+var options = {
+  'method': 'GET',
+  'url': 'https://raw.githubusercontent.com/nuuuwan/covid19/data/covid19.epid.vaxs.latest.tsv',
+  'headers': {
+  }
+};
+
+request(options, function (error, response) {
+  if (error) throw new Error(error);
+  data = tsvJSON(response.body).filter(a => a.ut != "" || false);
+  fs.writeFileSync("./data/vax-latest.json", JSON.stringify(data, null, 4));
+});

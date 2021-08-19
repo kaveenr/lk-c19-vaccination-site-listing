@@ -12,9 +12,8 @@ export const AppHeader = ({ sub }) => {
         <header className="mt-2 md:mt-8 mb-8 text-center">
             <Link href="/">
                 <div>
-                    <p className="md:text-3xl text-2xl mb-2">💉</p>
                     <a className="md:text-3xl text-2xl font-bold text-pink-600">
-                        {t('title')} 
+                        💉{' '}{t('title')} 
                     </a>
                 </div>
             </Link>
