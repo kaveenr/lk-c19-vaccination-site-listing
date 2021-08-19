@@ -22,7 +22,7 @@ var options = {
   };
   request(options, function (error, response) {
     if (error) throw new Error(error);
-    data = tsvJSON(response.body).filter(a => a.district != "");
+    data = tsvJSON(response.body).filter(a => a.district || false);
 
     transform = {
       districtSlugs: (
