@@ -6,13 +6,14 @@ import ReactMapGL, { FlyToInterpolator, Marker } from 'react-map-gl';
 import { useEffect, useRef, useState } from 'react';
 import useSize from '@react-hook/size';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSyringe } from '@fortawesome/free-solid-svg-icons'
+import { faSyringe, faHome, faMapPin } from '@fortawesome/free-solid-svg-icons'
 import { truncate } from 'lodash';
 import { AppFooter } from '../components/AppFooter';
 import Link from 'next/link'
 import WebMercatorViewport from "viewport-mercator-project"
 import { getBounds } from '../util/mapUtils';
 import { MPABOX_TOKEN } from '../util/constants';
+import { point, distance } from "@turf/turf";
 
 
 const ItmRow = ({itm, lprefix, onHover}) => {
@@ -51,13 +52,15 @@ export default function District(props) {
   const [ width, height ] = useSize(mapRef);
   const t = useTranslations('District');
 
+  const [placesList, setPlacesList] = useState(props.items);
+
   const { locale } = useRouter();
   const lprefix = locale == "en" ? "": `_${locale}`
 
   const startPoint = props.items[0];
   const [viewport, setViewport] = useState({
-    width: width || 200,
-    height: height || 200
+    width: width || "100%",
+    height: height || "100%"
   });
 
   useEffect(() => {
@@ -84,8 +87,40 @@ export default function District(props) {
       zoom: 15,
       transitionInterpolator: new FlyToInterpolator({speed: 1.2}),
       transitionDuration: 'auto'
-  }));
+    }));
   }
+
+  const [filterLoc, setFilterLoc] = useState(null);
+
+  const getLocation = () => {
+    window.navigator.geolocation.getCurrentPosition((pos) => {
+      setFilterLoc([pos.coords.longitude, pos.coords.latitude]);
+      setViewport((viewport) => ({
+        ...viewport,
+        latitude: pos.coords.latitude,
+        longitude: pos.coords.longitude,
+        zoom: 15,
+        transitionInterpolator: new FlyToInterpolator({speed: 1.2}),
+        transitionDuration: 'auto'
+      }));
+    }, (err) => {
+      alert("Unable to get location :(");
+      console.error(err);
+    });
+  }
+
+  useEffect(() => {
+    if (filterLoc) {
+      setPlacesList(placesList.map(a => {
+        var from = point(filterLoc);
+        var to = point([a.lng, a.lat]);
+        return {
+          ...a,
+          distance: distance(from, to, { units: 'kilometers'})
+        }
+      }).sort((a,b) => (a.distance > b.distance)))
+    }
+  }, [filterLoc])
   
   return (
     <>
@@ -101,7 +136,17 @@ export default function District(props) {
               mapboxApiAccessToken={MPABOX_TOKEN}
               onViewportChange={nextViewport => setViewport(nextViewport)}
             >
-              {props.items.map(a => <Marker latitude={parseFloat(a.lat)} longitude={parseFloat(a.lng)}>
+              { filterLoc ? (
+                <Marker latitude={filterLoc[1]} longitude={filterLoc[0]}>
+                  <a className={"bg-green-50 bg-opacity-50 rounded-full h-24 w-24 flex flex-col items-center justify-center"}>
+                    <div className="h-4 w-4">
+                      <FontAwesomeIcon icon={faHome} color="blue" />
+                    </div>
+                    <p className="text-xs font-medium text-center">Your Location</p>
+                  </a>
+                </Marker>
+              ) : []}
+              {placesList.map(a => <Marker latitude={parseFloat(a.lat)} longitude={parseFloat(a.lng)}>
                 <Link href={`/${a.district}/${a.center}`} key={a.center}>
                 <a className={"bg-yellow-50 bg-opacity-50 rounded-full h-24 w-24 flex flex-col items-center justify-center"}>
                   <div className="h-4 w-4">
@@ -115,7 +160,13 @@ export default function District(props) {
           </div>
         </div>
         <div className="md:overflow-y-auto md:overscroll-y-auto">
-          {props.items.map(itm => <ItmRow onHover={onHover} itm={itm} lprefix={lprefix} />)}
+          <div className="mb-4">
+            <a onClick={getLocation} className="text-white text-sm px-4 py-2 rounded-full bg-green-400 flex gap-2">
+              <span className="h-4 w-4"><FontAwesomeIcon icon={faMapPin} color="white"/></span>
+              {t('sortDist')}
+            </a>
+          </div>
+          {placesList.map(itm => <ItmRow onHover={onHover} itm={itm} lprefix={lprefix} />)}
         </div>
       </main>
       <AppFooter />

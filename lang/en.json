@@ -25,7 +25,8 @@
       "police": "Police Area",
       "address": "Address",
       "dose1": "First Dose",
-      "dose2": "Second Dose"
+      "dose2": "Second Dose",
+      "sortDist": "Sort By Closest To Me"
     },
     "Center": {
       "title": "Vaccination Station - {center}",
