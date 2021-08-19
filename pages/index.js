@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import {useTranslations} from 'next-intl';
+import {useTranslations, useIntl} from 'next-intl';
 import {useRouter} from 'next/router';
 import Link from 'next/link'
 import { AppHeader } from '../components/AppHeader';
@@ -11,6 +11,7 @@ import { takeRight, last, startCase } from 'lodash';
 const ChartComponent = ({vaxData}) => {
 
   const t = useTranslations('Graph');
+  const intl = useIntl();
 
   const lastEntry = last(vaxData);
   const vaxPrgData = ["covishield", "sinopharm", "sputnik", "pfizer", "moderna"].map(vax => ({
@@ -21,7 +22,7 @@ const ChartComponent = ({vaxData}) => {
 
   return (
     <div className="flex flex-col items-stretch h-full ">
-      <div className="w-full flex-grow text-center px-2 py-4">
+      <div className="w-full flex-grow text-center px-4 py-8">
         <p className="text-2xl mb-4">{t('totalDo')}</p>
         <ResponsiveContainer height="85%">
           <AreaChart
@@ -29,13 +30,13 @@ const ChartComponent = ({vaxData}) => {
 
           margin={{
             top: 0,
-            right: 35,
-            left: 35,
+            right: 50,
+            left: 50,
             bottom: 0,
           }}
         >
-          <XAxis dataKey="date" name="date"/>
-          <YAxis type="number" domain={['auto', 'auto']} />
+          <XAxis dataKey="date" name="date" tickFormatter={(i) => (intl.formatDateTime(new Date(i),  { month: 'long', day: 'numeric'}))} />
+          <YAxis type="number" domain={['auto', 'auto']} tickFormatter={(i) => (intl.formatNumber(i))} />
           <Tooltip />
           <Area name={t('cumDo1')} type="monotone" stackId="1" dataKey="cum_total_dose1" stroke="#ffc658" fill="#ffc658" />
           <Area name={t('cumDo2')} type="monotone" stackId="1" dataKey="cum_total_dose2" stroke="#82ca9d" fill="#82ca9d" />
@@ -49,13 +50,13 @@ const ChartComponent = ({vaxData}) => {
               data={vaxPrgData}
               margin={{
                 top: 0,
-                right: 35,
-                left: 35,
+                right: 50,
+                left: 50,
                 bottom: 0,
               }}
             >
               <XAxis dataKey="name" />
-              <YAxis />
+              <YAxis  tickFormatter={(i) => (i.toLocaleString("en-US"))}/>
               <Tooltip />
               <Legend />
               <Bar name={t('cumDo1')} dataKey="dose1" stackId="1" fill="#ffc658" />
