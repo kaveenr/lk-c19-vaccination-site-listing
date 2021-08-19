@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { AppHeader } from '../components/AppHeader';
 import { AppFooter } from '../components/AppFooter';
 import { AreaChart,BarChart, Bar, Area, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { takeRight, last } from 'lodash';
+import { takeRight, last, startCase } from 'lodash';
 
 
 const ChartComponent = ({vaxData}) => {
@@ -14,7 +14,7 @@ const ChartComponent = ({vaxData}) => {
 
   const lastEntry = last(vaxData);
   const vaxPrgData = ["covishield", "sinopharm", "sputnik", "pfizer", "moderna"].map(vax => ({
-    name: vax, 
+    name: startCase(vax), 
     dose1: parseInt(lastEntry[`cum_${vax}_dose1`]),
     dose2: parseInt(lastEntry[`cum_${vax}_dose2`])
   }))
