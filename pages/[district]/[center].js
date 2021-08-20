@@ -51,7 +51,8 @@ export default function Center(props) {
       <main className="grid gap-4 grid-cols-1 md:grid-cols-2 grid-row-1 md:h-2/3">
         <div className="bg-gray-50 h-96 hidden md:block md:h-full">
           <div ref={mapRef} className={"h-full"}>
-            <ReactMapGL
+            { (startPoint.lat || startPoint.lat != "") ? (
+              <ReactMapGL
               {...viewport}
               mapboxApiAccessToken={MPABOX_TOKEN}
               onViewportChange={nextViewport => setViewport(nextViewport)}
@@ -64,7 +65,8 @@ export default function Center(props) {
                   <p className="text-xs font-medium text-center">{truncate(startPoint[`center${lprefix}`], { length: 15})}</p>
                 </a>
               </Marker>
-          </ReactMapGL>
+            </ReactMapGL>
+            ) : []}
           </div>
         </div>
         <div className="md:overflow-y-auto md:overscroll-y-auto bg-gray-50 p-4">

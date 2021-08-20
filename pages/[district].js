@@ -11,7 +11,7 @@ import { truncate } from 'lodash';
 import { AppFooter } from '../components/AppFooter';
 import Link from 'next/link'
 import WebMercatorViewport from "viewport-mercator-project"
-import { getBounds } from '../util/mapUtils';
+import { getBounds, getMappable } from '../util/mapUtils';
 import { MPABOX_TOKEN } from '../util/constants';
 import { point, distance } from "@turf/turf";
 
@@ -57,15 +57,15 @@ export default function District(props) {
   const { locale } = useRouter();
   const lprefix = locale == "en" ? "": `_${locale}`
 
-  const startPoint = props.items[0];
+  const startPoint = placesList[0];
   const [viewport, setViewport] = useState({
     width: width || "100%",
     height: height || "100%"
   });
 
   useEffect(() => {
-    if (width && height && props.items.length){
-      const bounds = getBounds(props.items);
+    if (width && height && placesList.length){
+      const bounds = getBounds(getMappable(placesList));
       setViewport((viewport) => {
         const nextViewport = new WebMercatorViewport({
           ...viewport,
@@ -80,6 +80,9 @@ export default function District(props) {
   }, [width, height]);
 
   const onHover = (itm) => {
+    if (!itm.lat || itm.lat == null){
+      return;
+    }
     setViewport((viewport) => ({
       ...viewport,
       latitude: parseFloat(itm.lat),
@@ -146,7 +149,7 @@ export default function District(props) {
                   </a>
                 </Marker>
               ) : []}
-              {placesList.map(a => <Marker latitude={parseFloat(a.lat)} longitude={parseFloat(a.lng)}>
+              {getMappable(placesList).map(a => <Marker latitude={parseFloat(a.lat)} longitude={parseFloat(a.lng)}>
                 <Link href={`/${a.district}/${a.center}`} key={a.center}>
                 <a className={"bg-yellow-50 bg-opacity-50 rounded-full h-24 w-24 flex flex-col items-center justify-center"}>
                   <div className="h-4 w-4">

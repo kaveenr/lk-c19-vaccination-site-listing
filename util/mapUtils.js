@@ -21,4 +21,8 @@ export const getBounds = (markers) => {
     const northEast = [parseFloat(maxLng), parseFloat(maxLat)];
     return [southWest, northEast];
 };
+
+export const getMappable = (markers) => {
+  return markers.filter((a) => (a.lat || a.lat != ""));
+}
   
