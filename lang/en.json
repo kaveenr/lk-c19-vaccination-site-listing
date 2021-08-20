@@ -8,7 +8,9 @@
     "Header": {
       "title": "COVID 19 Vaccination Locations",
       "sub": "Find Vaccination Stations In Sri Lanka",
-      "lang": "Language"
+      "lang": "Language",
+      "seoTitle": "Get Vaccinated Sri Lanka",
+      "seoDisc": "Find the closest vaccination centres for you and get vaccinated today!"
     },
     "Footer": {
       "lastUpdated": "Last updated on {date}",

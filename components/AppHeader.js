@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import {useTranslations} from 'next-intl';
 import {useRouter} from 'next/router';
-
+import Head from 'next/head'
 
 export const AppHeader = ({ sub }) => {
 
@@ -10,6 +10,23 @@ export const AppHeader = ({ sub }) => {
 
     return (
         <header className="mt-2 md:mt-8 mb-8 text-center">
+            <Head>
+                <title>{sub ? sub: t("seoTitle")}</title>
+                <meta name="title" content={sub ? sub: t("seoTitle")} />
+                <meta name="description" content={t("seoDisc")}/>
+
+                <meta property="og:type" content="website"/>
+                <meta property="og:url" content="https://vax.covid.ukr.lk/"/>
+                <meta property="og:title" content={sub ? sub: t("seoTitle")}/>
+                <meta property="og:description" content={t("seoDisc")}/>
+                <meta property="og:image" content={`/img/seo_${locale}.png`}/>
+
+                <meta property="twitter:card" content="summary_large_image"/>
+                <meta property="twitter:url" content="https://vax.covid.ukr.lk/"/>
+                <meta property="twitter:title" content={sub ? sub: t("seoTitle")}/>
+                <meta property="twitter:description" content={t("seoDisc")}/>
+                <meta property="twitter:image" content={`/img/seo_${locale}.png`}></meta>
+            </Head>
             <Link href="/">
                 <div>
                     <a className="md:text-3xl text-2xl font-bold text-pink-600">
