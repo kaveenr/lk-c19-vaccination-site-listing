@@ -99,7 +99,7 @@ export default function District(props) {
         ...viewport,
         latitude: pos.coords.latitude,
         longitude: pos.coords.longitude,
-        zoom: 15,
+        zoom: 11,
         transitionInterpolator: new FlyToInterpolator({speed: 1.2}),
         transitionDuration: 'auto'
       }));

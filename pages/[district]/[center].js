@@ -49,7 +49,7 @@ export default function Center(props) {
       </Head>
       <AppHeader sub={t("sub", {center: startPoint[`center${lprefix}`]})}/>
       <main className="grid gap-4 grid-cols-1 md:grid-cols-2 grid-row-1 md:h-2/3">
-        <div className="bg-gray-50 h-96 md:h-full">
+        <div className="bg-gray-50 h-96 hidden md:block md:h-full">
           <div ref={mapRef} className={"h-full"}>
             <ReactMapGL
               {...viewport}

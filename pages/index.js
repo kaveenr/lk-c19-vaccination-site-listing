@@ -23,7 +23,7 @@ const ChartComponent = ({vaxData}) => {
   return (
     <div className="flex flex-col items-stretch h-full ">
       <div className="w-full flex-grow text-center px-4 py-8">
-        <p className="text-2xl mb-4">{t('totalDo')}</p>
+        <p className="text-md md:text-2xl mb-4">{t('totalDo')}</p>
         <ResponsiveContainer height="85%" width="100%">
           <AreaChart
           data={vaxData}
@@ -44,7 +44,7 @@ const ChartComponent = ({vaxData}) => {
         </ResponsiveContainer>
       </div>
       <div className="w-full flex-grow text-center px-2 py-4 hidden md:block">
-        <p className="text-2xl mb-4">{t('totalVa')}</p>
+        <p className="text-md md:text-2xl mb-4">{t('totalVa')}</p>
         <ResponsiveContainer height="85%" width="100%">
           <BarChart
               data={vaxPrgData}
