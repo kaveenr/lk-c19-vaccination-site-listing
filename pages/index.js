@@ -94,8 +94,8 @@ export default function Home(props) {
             <ChartComponent vaxData={props.vaxDataset}/>
         </div>
         <div className="md:overflow-y-auto md:overscroll-y-auto">
-          {props.districtSlugs.map(a => (
-              <Link href={`/${a}`}>
+          {props.districtSlugs.map((a, index) => (
+              <Link key={index} href={`/${a}`}>
                 <a>
                 <div className={"bg-gray-50 px-6 py-4 mb-4"}>
                   <p className={"text-xl font-medium pb-2"}>{getLocalDistrict(a)}</p>
