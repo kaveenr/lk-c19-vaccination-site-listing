@@ -24,7 +24,7 @@ const ChartComponent = ({vaxData}) => {
     <div className="flex flex-col items-stretch h-full ">
       <div className="w-full flex-grow text-center px-4 py-8">
         <p className="text-2xl mb-4">{t('totalDo')}</p>
-        <ResponsiveContainer height="85%">
+        <ResponsiveContainer height="85%" width="100%">
           <AreaChart
           data={vaxData}
 
@@ -43,9 +43,9 @@ const ChartComponent = ({vaxData}) => {
         </AreaChart>
         </ResponsiveContainer>
       </div>
-      <div className="w-full flex-grow text-center px-2 py-4">
+      <div className="w-full flex-grow text-center px-2 py-4 hidden md:block">
         <p className="text-2xl mb-4">{t('totalVa')}</p>
-        <ResponsiveContainer height="85%">
+        <ResponsiveContainer height="85%" width="100%">
           <BarChart
               data={vaxPrgData}
               margin={{
@@ -90,7 +90,7 @@ export default function Home(props) {
       </Head>
       <AppHeader/>
       <main className="grid gap-4 grid-cols-1 md:grid-cols-2 grid-row-1 md:h-2/3">
-        <div className="bg-gray-50 hidden md:block h-full">
+        <div className="bg-gray-50 h-full h-96 md:h-auto">
             <ChartComponent vaxData={props.vaxDataset}/>
         </div>
         <div className="md:overflow-y-auto md:overscroll-y-auto">

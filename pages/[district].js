@@ -129,7 +129,7 @@ export default function District(props) {
       </Head>
       <AppHeader sub={t("sub", {district: startPoint[`district${lprefix}`]})}/>
       <main className="grid gap-4 grid-cols-1 md:grid-cols-2 grid-row-1 md:h-2/3">
-        <div className={"bg-gray-50 hidden md:block h-full"}>
+        <div className={"bg-gray-50 h-96 md:h-full"}>
           <div ref={mapRef} className={"h-full"}>
             <ReactMapGL
               {...viewport}
@@ -162,7 +162,7 @@ export default function District(props) {
         <div className="md:overflow-y-auto md:overscroll-y-auto">
           <div className="mb-4">
             <a onClick={getLocation} className="text-white text-sm px-4 py-2 rounded-full bg-green-400 flex gap-2">
-              <span className="h-4 w-4"><FontAwesomeIcon icon={faMapPin} color="white"/></span>
+              <span className="h-2 w-2"><FontAwesomeIcon icon={faMapPin} color="white"/></span>
               {t('sortDist')}
             </a>
           </div>
