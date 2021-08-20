@@ -1,7 +1,4 @@
-import Link from 'next/link';
 import {useTranslations, useIntl} from 'next-intl';
-import {useRouter} from 'next/router';
-
 
 export const AppFooter = () => {
 
@@ -20,7 +17,8 @@ export const AppFooter = () => {
             <a target="_blank" href="https://github.com/nuuuwan" className="mt-3 text-sm hover:text-blue-600 text-blue-500">
                 {t("dataBy")}
             </a>{' '}
-            <a target="_blank" href="https://ukr.lk" className="mt-3 text-sm hover:text-blue-600 text-blue-500">
+            <a target="_blank" href="https://github.com/kaveenr/lk-c19-vaccination-site-listing/graphs/contributors" 
+                className="mt-3 text-sm hover:text-blue-600 text-blue-500">
                 {t("applicationBy")}
             </a>
         </footer>
