@@ -1,16 +1,24 @@
 var request = require('request');
 const fs = require('fs');
-const { snakeCase } = require('lodash');
+const { isNil } = require('lodash');
+
+const isValidDataVax = (itm) => {
+  return (!isNil(itm.district) && (itm.district != "")) && !isNil(itm.center) && (itm.center != "");
+}
+
+const isValidDataStat = (itm) => {
+  return (!isNil(itm.date) && (itm.date != "")) && !isNil(itm.cum_total) && (itm.cum_total != "");
+}
 
 function tsvJSON(tsv) {
     const lines = tsv.split('\n');
     const headers = lines.shift().split('\t');
     return lines.map(line => {
-    const data = line.split('\t');
-    return headers.reduce((obj, nextKey, index) => {
+      const data = line.split('\t');
+      return headers.reduce((obj, nextKey, index) => {
         obj[nextKey.trim()] = data[index];
         return obj;
-    }, {});
+      }, {});
     });
 }
 
@@ -23,7 +31,7 @@ var options = {
 
 request(options, function (error, response) {
   if (error) throw new Error(error);
-  data = tsvJSON(response.body).filter(a => a.fuzzy_key != "" || false);
+  data = tsvJSON(response.body).filter(isValidDataVax);
 
   transform = {
     districtSlugs: (
@@ -43,6 +51,6 @@ var options = {
 
 request(options, function (error, response) {
   if (error) throw new Error(error);
-  data = tsvJSON(response.body).filter(a => a.ut != "" || false);
+  data = tsvJSON(response.body).filter(isValidDataStat);
   fs.writeFileSync("./data/vax-latest.json", JSON.stringify(data, null, 4));
 });
