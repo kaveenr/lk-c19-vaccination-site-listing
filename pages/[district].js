@@ -149,7 +149,7 @@ export default function District(props) {
                   </a>
                 </Marker>
               ) : []}
-              {getMappable(placesList).map((a, index) => <Marker key={index} latitude={parseFloat(a.lat)} longitude={parseFloat(a.lng)}>
+              {getMappable(placesList).map(a => <Marker key={a.fuzzy_key} latitude={parseFloat(a.lat)} longitude={parseFloat(a.lng)}>
                 <Link href={`/${a.district}/${a.center}`} key={a.center}>
                 <a className={"bg-yellow-50 bg-opacity-50 rounded-full h-24 w-24 flex flex-col items-center justify-center"}>
                   <div className="h-4 w-4">
@@ -169,7 +169,7 @@ export default function District(props) {
               {t('sortDist')}
             </a>
           </div>
-          {placesList.map((itm, index) => <ItmRow key={index} onHover={onHover} itm={itm} lprefix={lprefix} />)}
+          {placesList.map(itm => <ItmRow key={itm.fuzzy_key} onHover={onHover} itm={itm} lprefix={lprefix} />)}
         </div>
       </main>
       <AppFooter />
