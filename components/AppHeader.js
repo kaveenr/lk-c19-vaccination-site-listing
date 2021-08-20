@@ -19,7 +19,7 @@ export const AppHeader = ({ sub }) => {
                 <meta property="og:url" content="https://vax.covid.ukr.lk/"/>
                 <meta property="og:title" content={sub ? sub: t("seoTitle")}/>
                 <meta property="og:description" content={t("seoDisc")}/>
-                <meta property="og:image" content={`https://vax.covid.ukr.lk/img/img/seo_${locale}.png`}/>
+                <meta property="og:image" content={`https://vax.covid.ukr.lk/img/seo_${locale}.png`}/>
 
                 <meta property="twitter:card" content="summary_large_image"/>
                 <meta property="twitter:url" content="https://vax.covid.ukr.lk/"/>
