@@ -1,6 +1,6 @@
 var request = require('request');
 const fs = require('fs');
-const { isNil } = require('lodash');
+const { isNil, kebabCase } = require('lodash');
 
 const isValidDataVax = (itm) => {
   return (!isNil(itm.district) && (itm.district != "")) && !isNil(itm.center) && (itm.center != "");
@@ -31,11 +31,15 @@ var options = {
 
 request(options, function (error, response) {
   if (error) throw new Error(error);
-  data = tsvJSON(response.body).filter(isValidDataVax);
+  data = tsvJSON(response.body).filter(isValidDataVax).map((item) => ({
+    ...item,
+    districtSlug: kebabCase(item.district),
+    centerSlug: kebabCase(item.center),
+  }));
 
   transform = {
     districtSlugs: (
-      [... new Set(data.map(a=> a.district))]
+      [... new Set(data.map(a=> a.districtSlug))]
     ),
     dataSet: data
   }

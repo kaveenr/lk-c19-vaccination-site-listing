@@ -126,8 +126,8 @@ export async function getStaticPaths() {
         return { 
           locale: locale,
           params: {
-            district: item.district,
-            center: item.center
+            district: item.districtSlug,
+            center: item.centerSlug
           }
         }
       })).flat();
@@ -146,7 +146,7 @@ export function getStaticProps({locale, params}) {
     props: {
       district: params.district,
       center: params.center,
-      place: data.dataSet.find(i => i.district === params.district && i.center === params.center),
+      place: data.dataSet.find(i => i.districtSlug === params.district && i.centerSlug === params.center),
       messages: {
         ...require(`../../lang/${locale}.json`),
       },

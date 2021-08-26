@@ -20,7 +20,7 @@ const ItmRow = ({itm, lprefix, onHover}) => {
   const t = useTranslations('District');
 
   return (
-    <Link href={`/${itm.district}/${itm.center}`} key={itm.center}>
+    <Link href={`/${itm.districtSlug}/${itm.centerSlug}`} key={itm.centerSlug}>
       <a>
       <div className={"bg-gray-50 px-6 py-4 mb-4"} onMouseEnter={() => onHover(itm)}>
         <p className={"text-xl font-medium "}>{itm[`center${lprefix}`]}</p>
@@ -150,7 +150,7 @@ export default function District(props) {
                 </Marker>
               ) : []}
               {getMappable(placesList).map(a => <Marker key={a.fuzzy_key} latitude={parseFloat(a.lat)} longitude={parseFloat(a.lng)}>
-                <Link href={`/${a.district}/${a.center}`} key={a.center}>
+                <Link href={`/${a.districtSlug}/${a.centerSlug}`} key={a.centerSlug}>
                 <a className={"bg-yellow-50 bg-opacity-50 rounded-full h-24 w-24 flex flex-col items-center justify-center"}>
                   <div className="h-4 w-4">
                     <FontAwesomeIcon icon={faSyringe} color="red" />
@@ -204,7 +204,7 @@ export function getStaticProps({locale, params}) {
   return {
     props: {
       district: params.district, 
-      items: data.dataSet.filter(i => i.district === params.district),
+      items: data.dataSet.filter(i => i.districtSlug === params.district),
       messages: {
         ...require(`../lang/${locale}.json`),
       },

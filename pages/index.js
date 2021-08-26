@@ -6,7 +6,7 @@ import { AppHeader } from '../components/AppHeader';
 import { AppFooter } from '../components/AppFooter';
 import { AreaChart,BarChart, Bar, Area, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { takeRight, last, startCase } from 'lodash';
-
+import { VACCINE_COLORS, VACCINE_TYPES } from '../util/constants';
 
 const ChartComponent = ({vaxData}) => {
 
@@ -14,7 +14,7 @@ const ChartComponent = ({vaxData}) => {
   const intl = useIntl();
 
   const lastEntry = last(vaxData);
-  const vaxPrgData = ["covishield", "sinopharm", "sputnik", "pfizer", "moderna"].map(vax => ({
+  const vaxPrgData = VACCINE_TYPES.map(vax => ({
     name: startCase(vax), 
     dose1: parseInt(lastEntry[`cum_${vax}_dose1`]),
     dose2: parseInt(lastEntry[`cum_${vax}_dose2`])
@@ -74,12 +74,12 @@ export default function Home(props) {
   const { locale } = useRouter();
 
   const getLocalDistrict = (slug) => {
-    return props.dataset.find(a => a.district === slug)
+    return props.dataset.find(a => a.districtSlug === slug)
       [locale == "en" ? "district": `district_${locale}`];
   }
 
   const getStationCount = (slug) => {
-    return props.dataset.filter(a => a.district === slug).length;
+    return props.dataset.filter(a => a.districtSlug === slug).length;
   }
 
   return (
