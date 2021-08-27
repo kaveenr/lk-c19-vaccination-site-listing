@@ -25,6 +25,9 @@ const ItmRow = ({itm, lprefix, onHover}) => {
       <div className={"bg-gray-50 px-6 py-4 mb-4"} onMouseEnter={() => onHover(itm)}>
         <p className={"text-xl font-medium "}>{itm[`center${lprefix}`]}</p>
         <div className="flex gap-2 pb-2 pt-1">
+          {itm.vaxes.map((vax) => (
+            <p className={"text-gray-900 text-sm px-2 italic font-medium border-2 rounded-full border-gray-900"}>{vax}</p>
+          ))}
           {itm.dose1 == "True" ? (
             <p className={"text-gray-600 text-sm px-2 italic border-2 rounded-full border-gray-600"}>{t('dose1')}</p>
           ): []}
